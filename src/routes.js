@@ -13,6 +13,7 @@ import HeaderComponent from './components/HeaderComponent';
 const Routes = createAppContainer(
     createStackNavigator({
         Search,
+        Historic,
         Presentation,
         Home,
         Download

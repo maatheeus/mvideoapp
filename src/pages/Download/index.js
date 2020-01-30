@@ -4,7 +4,8 @@ import {Picker} from 'react-native'
 import {useNavigation,useNavigationParam} from 'react-navigation-hooks';
 import {useDispatch, useSelector} from 'react-redux';
 
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
+import RNFetchBlob from 'rn-fetch-blob'
 
 import {downloadFile} from '../../helpers/Download.helper';
 import VideoItem from '../../components/VideoItem';
@@ -22,8 +23,22 @@ const Download = () => {
     let type_quality = info_video_download.picker_selecionado == 'audio' ? info_video_download.videos.audio : info_video_download.videos.video;
     
     const start_download_file_back_page = (link,name,format) => {
-        downloadFile(link,name,format);
+        let dirs = RNFetchBlob.fs.dirs.DCIMDir
+        downloadFile(link,name,format,dirs);
+        storeData({dirs,name,format});
         goBack();
+       
+    }
+
+    const storeData = async (data) => {
+        try{
+            let store_historic_download = await AsyncStorage.getItem('@historic_download')
+            store_historic_download = JSON.parse(store_historic_download);
+            let new_historic_download = Array.isArray(store_historic_download) ? [data,...store_historic_download] : [data];
+            await AsyncStorage.setItem('@historic_download',JSON.stringify(new_historic_download))
+        }catch(e){
+            console.log(e);
+        }
     }
 
     if(!info_video_download.is_complete) return <Loading size="large" color="#F39422" />

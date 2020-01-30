@@ -1,5 +1,8 @@
-import React from 'react';
+import React,{useEffect,useLayoutEffect} from 'react';
 import {Text} from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -10,16 +13,25 @@ import {
     NameVideo,
     DescriptionHistoric} from './style';
 const Historic = () => {
-    let teste = [{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'},{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'},{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'},{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'},{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'},{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'},{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'},{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'},{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'},{'id':1, 'name_video': 'MATHEUS TESTE', 'source' : 'C://teste/teste', 'format' : 'MP4'}]; 
-    
+    console.log("Renderizando Componente 6");
+    const dispatch = useDispatch();
+    let data_historic = useSelector(state => state.video_reducer.historicDownload.data);
+
+   
+
+    useLayoutEffect(() => {
+        AsyncStorage.getItem("@historic_download").then((data) => {
+            dispatch({type:'SET_NEW_HISTORIC_DOWNLOAD', historicDownload: JSON.parse(data)})
+        });    
+    },[])
     const renderItem = (item) => { 
         return (
                 <ContainerItem>
                     <Icon name="download" size={60} color="#F39422" />
                     <Container>
-                        <NameVideo key={item.id}>{item.name_video}</NameVideo>
+                        <NameVideo key={item.id}>{item.name}</NameVideo>
                         <DescriptionHistoric>Formato : {item.format}</DescriptionHistoric>
-                        <DescriptionHistoric>Source : {item.source}</DescriptionHistoric>
+                        <DescriptionHistoric>Source : {item.dirs}</DescriptionHistoric>
                     </Container>
                 </ContainerItem>
         )
@@ -28,7 +40,7 @@ const Historic = () => {
     return(
         <Container>
             <ListHistoric 
-                data={teste}
+                data={data_historic}
                 renderItem={({item}) => renderItem(item)}
             />
         </Container>

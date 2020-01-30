@@ -1,15 +1,14 @@
 import RNFetchBlob from 'rn-fetch-blob'
 import {ToastAndroid} from 'react-native'
-export const downloadFile = (link,title,format) => {
+export const downloadFile = (link,title,format, dirs) => {
     
     ToastAndroid.show(`O download do arquivo '${title}.${format}' foi iniciado. `, ToastAndroid.LONG);
-    let dirs = RNFetchBlob.fs.dirs;
     RNFetchBlob
     .config({
         addAndroidDownloads : {
             useDownloadManager : true,
             notification : true,
-            path : dirs.DCIMDir + `/${title}.${format}`,
+            path : dirs + `/${title}.${format}`,
             description : 'Mvideos Download.'
         }
     })

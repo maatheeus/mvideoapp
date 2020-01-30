@@ -1,7 +1,12 @@
-const initialState = {topTreding: {videos : [], is_complete : false}, videoDownloadSeleted: {formato_selecionado : '', link_video: '',picker_selecionado : 'audio',is_complete : false, videos : {}}}
+const initialState = {historicDownload : {data : []}, topTreding: {videos : [], is_complete : false}, videoDownloadSeleted: {formato_selecionado : '', link_video: '',picker_selecionado : 'audio',is_complete : false, videos : {}}}
 
 export const VideoReducer = (state = initialState,action) => {
     switch(action.type){
+        case 'SET_NEW_HISTORIC_DOWNLOAD':
+            return {
+                ...state,
+                historicDownload: {data: action.historicDownload}
+            }
         case 'SET_NEW_TREDING':
            return{
                ...state,
