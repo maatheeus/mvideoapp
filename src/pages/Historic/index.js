@@ -12,12 +12,10 @@ import {
     ContainerItem,
     NameVideo,
     DescriptionHistoric} from './style';
+
 const Historic = () => {
-    console.log("Renderizando Componente 6");
     const dispatch = useDispatch();
     let data_historic = useSelector(state => state.video_reducer.historicDownload.data);
-
-   
 
     useLayoutEffect(() => {
         AsyncStorage.getItem("@historic_download").then((data) => {

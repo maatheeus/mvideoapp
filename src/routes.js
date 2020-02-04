@@ -12,10 +12,10 @@ import HeaderComponent from './components/HeaderComponent';
 
 const Routes = createAppContainer(
     createStackNavigator({
-        Search,
+        Home,
         Historic,
         Presentation,
-        Home,
+        Search,
         Download
     },{
         defaultNavigationOptions:{
