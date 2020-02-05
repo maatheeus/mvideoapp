@@ -16,7 +16,6 @@ import HeaderComponent from './components/HeaderComponent';
 const TabNavigator = createBottomTabNavigator({
     Inicio : { 
         screen : Home,
-        title : 'Inicio',
         navigationOptions: {
             tabBarIcon :  ({tintColor}) => <Icon name='home' size={25} color={tintColor} />
         }

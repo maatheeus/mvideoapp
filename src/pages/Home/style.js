@@ -12,7 +12,7 @@ export const ContainerCentralizado = styled.View `
 export const TextLinkVideo = styled.TextInput `
     width: 90%
     borderWidth: 1px;
-    borderColor: #293A80;
+    borderColor: #F39422;
 `
 
 export const TextDescricao = styled.Text `
